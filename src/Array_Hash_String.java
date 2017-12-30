@@ -232,9 +232,53 @@ public class Array_Hash_String {
         System.out.println("the longest consecutive elements sequences is " +max_length[max_length.length-1]);
     }
 
+    /**例题 6 Given input -> "I have 36 books, 40 pens2."; output
+     -> "I evah 36 skoob, 40 2snep." (Suppose punctuation mark
+     may only have period or comma)
+     *
+     * @param a String received outside
+     */
+        public static void reverseWords(String a){
+        String[] words=a.split(" ");
+        for(int i=0;i<words.length;i++){
+            if(!isNumeric(words[i])){
+                //deal with the reverse
+                words[i]=stringReverse(words[i]);
+                // deal with the symbol at beginning of word
+                if(words[i].charAt(0)==','||words[i].charAt(0)=='.'){
+                    StringBuilder stringBuilder=new StringBuilder(words[i]);
+                    //append the symbol at the end
+                    stringBuilder.append(words[i].charAt(0));
+                    //delete the beginning symbol
+                    stringBuilder.deleteCharAt(0);
+                    words[i]=stringBuilder.toString();
+                }
+            }
+        }
+        StringBuilder stringBuilder=new StringBuilder("");
+            for(int i=0;i<words.length;i++){
+                stringBuilder.append(words[i]);
+                stringBuilder.append(' ');
+            }
+            stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(" "));
+            System.out.println(stringBuilder.toString());
+        }
+    public static boolean isNumeric(String str) {
+
+        if (str != null && !"".equals(str.trim())) {
+            return str.matches("^[0-9]*$");
+        }
+        return false;
+    }
+    public static String stringReverse(String a){
+            StringBuilder stringBuilder=new StringBuilder(a);
+
+            return   stringBuilder.reverse().toString();
+    }
     public static void main(String[] args) {
-      /*  String a = "ab!c b";
-        String b = "abcvbcvbca";
+      /* String a = "ab!c b";
+
+         String b = "abcvbcvbca";
         String c = "anb!dbchj !";
         String d = "!bcba ";
         String e = "abcvbcvbcd";*/
@@ -247,6 +291,9 @@ public class Array_Hash_String {
         int[] arrs = {31, 6, 5, 32, 1, 3, 2};
         int result = 9;
          // twoElements(arrs, result);
-        longestSequence(arrs);
+      //  longestSequence(arrs);
+       reverseWords("I have 36 books, 40 pens2.");
+       //isNumeric("pens2");
+
     }
 }
