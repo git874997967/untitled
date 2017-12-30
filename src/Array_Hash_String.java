@@ -100,7 +100,7 @@ public class Array_Hash_String {
                     result = false;
                 }
             }*/
-            // build the map key is the char value is the times
+            // build the map key is the char value is the appear times
             Map map_a = new HashMap();
             for (int i = 0; i < char_a.length; i++) {
                 if (!map_a.containsKey(char_a[i])) {
@@ -174,10 +174,34 @@ public class Array_Hash_String {
      * @param arr
      */
     public static void longestSequence(int[] arr) {
-        Arrays.sort(arr);
+        // default value is 1
+        int length = 1;
+
+        /*Map checkMap=new HashMap<Integer,int[]>();
+
+        for(int i=0;i<arr.length;i++){
+            //set the range
+            int range[]=new int[2];
+             range[0]=arr[i]-1;
+             range[1]=arr[i]+1;
+             checkMap.put(arr[i],range);
+
+        }
+        for(int j=1;j<arr.length;j++){
+                int [] range= (int[]) checkMap.get(arr[j-1]);
+
+                if(arr[j]==range[0]||arr[j]==range[1]){
+                    System.out.println(range[0]+" "+j);
+                    length++;
+                }
+                else{
+                    length=1;
+                }
+        }*/
+         Arrays.sort(arr);
         int max_length[] = new int[arr.length];
-        int length = 0;
-        max_length[1] = 1;
+
+     /*   max_length[1] = 1;
         for (int i = 0; i < arr.length; i++) {
 
             if (i < arr.length - 1) {
@@ -193,9 +217,19 @@ public class Array_Hash_String {
             System.out.println(max_length[i] + " " + arr[i]);
         }
         Arrays.sort(max_length);
-        length = max_length[max_length.length - 1] + 1;
-
-        System.out.println("the longest consecutive elements sequences is " + length);
+        length = max_length[max_length.length - 1] + 1;*/
+     for(int i=1;i<arr.length;i++){
+         //prolong the length
+        if(arr[i-1]==arr[i]-1){
+            length++;
+        }
+        else{
+            max_length[i]=length;
+            length=1;
+        }
+     }
+        Arrays.sort(max_length);
+        System.out.println("the longest consecutive elements sequences is " +max_length[max_length.length-1]);
     }
 
     public static void main(String[] args) {
@@ -210,9 +244,9 @@ public class Array_Hash_String {
        /* isPermutation(b, e);
         isPermutation(a, d);*/
         //composString("abccccccd", "abbcdb");
-        int[] arrs = {31, 6, 0, 4, 32, 1, 3, 2};
+        int[] arrs = {31, 6, 5, 32, 1, 3, 2};
         int result = 9;
-        // twoElements(arrs, result);
+         // twoElements(arrs, result);
         longestSequence(arrs);
     }
 }
