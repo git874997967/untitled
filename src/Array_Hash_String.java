@@ -225,6 +225,7 @@ public class Array_Hash_String {
         }
         else{
             max_length[i]=length;
+            //reset length to default value for next check
             length=1;
         }
      }
@@ -260,7 +261,7 @@ public class Array_Hash_String {
                 stringBuilder.append(words[i]);
                 stringBuilder.append(' ');
             }
-            stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(" "));
+            stringBuilder.deleteCharAt(stringBuilder.length()-1);
             System.out.println(stringBuilder.toString());
         }
     public static boolean isNumeric(String str) {
