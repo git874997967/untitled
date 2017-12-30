@@ -177,41 +177,40 @@ public class Array_Hash_String {
         Arrays.sort(arr);
         int max_length[] = new int[arr.length];
         int length = 0;
-        max_length[1]=1;
-        for (int i = 0; i < arr.length ; i++) {
+        max_length[1] = 1;
+        for (int i = 0; i < arr.length; i++) {
 
-            if(i<arr.length-1){
-                if (arr[i] == arr[i+1] - 1) {
-                    max_length[i+1]=max_length[i]+1;
+            if (i < arr.length - 1) {
+                if (arr[i] == arr[i + 1] - 1) {
+                    max_length[i + 1] = max_length[i] + 1;
+                }
+            } else {
+                if (arr[i] == arr[i - 1] + 1) {
+                    max_length[i] = max_length[i - 1] + 1;
                 }
             }
-            else{
-                if(arr[i]==arr[i-1]+1){
-                    max_length[i]=max_length[i-1]+1;
-                }
-            }
 
-            System.out.println(max_length[i]+" "+arr[i]);
+            System.out.println(max_length[i] + " " + arr[i]);
         }
         Arrays.sort(max_length);
-        length = max_length[max_length.length - 1]+1;
+        length = max_length[max_length.length - 1] + 1;
 
-        System.out.println("the longest consecutive elements sequences is " +length);
+        System.out.println("the longest consecutive elements sequences is " + length);
     }
 
     public static void main(String[] args) {
-        String a = "ab!c b";
+      /*  String a = "ab!c b";
         String b = "abcvbcvbca";
         String c = "anb!dbchj !";
         String d = "!bcba ";
-        String e = "abcvbcvbcd";
+        String e = "abcvbcvbcd";*/
   /*     uniqueChar(a);
        uniqueChar(b);
        uniqueChar(c);*/
        /* isPermutation(b, e);
         isPermutation(a, d);*/
         //composString("abccccccd", "abbcdb");
-        int[] arrs = {31, 6,0,4, 32, 1, 3, 2};
+        int[] arrs = {31, 6, 0, 4, 32, 1, 3, 2};
         int result = 9;
         // twoElements(arrs, result);
         longestSequence(arrs);
