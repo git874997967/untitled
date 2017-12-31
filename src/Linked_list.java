@@ -141,7 +141,7 @@ public class Linked_list {
         if (args == 0) return head; // which means did not rotate
         // update the curr
         //link the tail to the head
-      curr.next = head;
+        curr.next = head;
         //update curr
         curr = head;
         // new tail is len-args-1
@@ -200,64 +200,133 @@ public class Linked_list {
         return head;
     }
 
-   /* public static Linked_list mergeList(Linked_list l1, Linked_list l2) {
-        if (l1 == null) return l2;
-        if (l2 == null) return l1;
+    /* public static Linked_list mergeList(Linked_list l1, Linked_list l2) {
+         if (l1 == null) return l2;
+         if (l2 == null) return l1;
 
-        Linked_list newList = new Linked_list();
-        ListNode l1_head = l1.head;
-        ListNode l2_head = l2.head;
-        while (l1_head != null && l2_head != null) {
-            // l1 val is smaller
-            if (l1_head.val < l2_head.val) {
-              newList.push(l1_head.val);
-                l1_head = l1_head.next;
-                newList.head = newList.head.next;
+         Linked_list newList = new Linked_list();
+         ListNode l1_head = l1.head;
+         ListNode l2_head = l2.head;
+         while (l1_head != null && l2_head != null) {
+             // l1 val is smaller
+             if (l1_head.val < l2_head.val) {
+               newList.push(l1_head.val);
+                 l1_head = l1_head.next;
+                 newList.head = newList.head.next;
+             } else {
+                 // l2 val is smaller
+                 newList.push(l2_head.val);
+                 l2_head = l2_head.next;
+                 newList.head = newList.head.next;
+             }
+
+         }
+         //consume one list empty  which exist will append directly
+         if (l1_head != null) {
+             newList.head.next = l1_head;
+         } else {
+             newList.head.next = l2_head;
+         }
+             newList.print();
+         return newList;
+     }*/
+
+    /**
+     * get algo from the youtube
+     *
+     * @return
+     */
+    public ListNode addOne() {
+        if (head == null) return null;
+        ListNode cur = head;
+        int plus = 1;
+        while (cur != null) {
+            int val = cur.val + plus;
+            if (val >= 10) {
+                cur.val = val - 10;
+                plus = 1;
             } else {
-                // l2 val is smaller
-                newList.push(l2_head.val);
-                l2_head = l2_head.next;
-                newList.head = newList.head.next;
+                cur.val = cur.val + plus;
+                plus = 0;
             }
-
+            cur = cur.next;
         }
-        //consume one list empty  which exist will append directly
-        if (l1_head != null) {
-            newList.head.next = l1_head;
+        return head;
+    }
+
+    /**
+     * deleteMafterN
+     *
+     * @param m means after m bits
+     * @param n means delete n bits
+     */
+    public ListNode deleteMafterN(int m, int n) {
+        if (head == null) return null;
+        ListNode cur = head;
+        int length = m + n;
+        while (cur != null) {
+            length--;
+            cur = cur.next;
+        }
+        if (length > 0) {
+            System.out.println(" list not long enough");
+            return null;
         } else {
-            newList.head.next = l2_head;
-        }
-            newList.print();
-        return newList;
-    }*/
+            // begin to cut the list
+            cur = head;
+            while (m > 0) {
+                cur = cur.next;
+                m--;
+            }
+            ListNode newHead = cur;
+            while (n > 0) {
+                newHead = newHead.next;
+                n--;
+            }
+            cur.next = newHead;
 
+        }
+
+        return head;
+    }
 
     public static void main(String[] args) {
         Linked_list llist = new Linked_list();
       /*  Linked_list l1 = new Linked_list();
         Linked_list l2 = new Linked_list();*/
         for (int i = 80; i > 0; i = i - 10) {
-         llist.push(i);
-           /*l1.push(i / 2);
-            l2.push(i - 15);*/
+            llist.push(i);
         }
 
         //llist.printMiddle();
         //llist.klast(3);
         //  System.out.println(llist.detectCircle());
-         llist.rotate(4);
+        //llist.rotate(4);
         //llist.print();
         // llist.reverse();
 
-       // llist.swap();
-     //   llist.print();
+        // llist.swap();
+        //   llist.print();
         //l1.print();
 
-   //   mergeList(l1, l2);
+        //   mergeList(l1, l2);
 
+        // llist.print();
+       /* ListNode newHead= new ListNode(1);
+        newHead.next=new ListNode(9);
+        newHead.next.next=new ListNode(9);
+        newHead.next.next.next=new ListNode(9);*/
+      /*  Linked_list llist2 = new Linked_list();
+        llist2.push(1);
+        llist2.push(9);
+        llist2.push(9);
+        llist2.push(9);
+        llist2.addOne();
+        llist2.print();*/
+        llist.deleteMafterN(2, 3);
         llist.print();
-
     }
+
     // util function
     public void print() {
         ListNode tnode = head;
