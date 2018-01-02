@@ -157,6 +157,7 @@ public class stack_queue {
  ;
 
     }
+
         public  static void  moveMR(Stack<Integer> M,Stack<Integer> R){
         if(M.isEmpty()&&R.isEmpty()) return;
 
@@ -205,6 +206,73 @@ public class stack_queue {
         }
     }
 
+   public static void  HanoiWithoutRecursion2(Stack<Integer> L){
+        if(L.isEmpty()) return ;
+        char src='L', aux='M',dest='R';
+        Stack<Integer> M=new Stack<>();
+        Stack<Integer> R=new Stack<>();
+        M.push(100);
+        R.push(100);
+
+            moveDisk(L,R,M,src,aux,dest);
+
+
+   }
+    public static  void moveDisk(Stack<Integer> L,Stack<Integer> M,Stack<Integer> R, char src,char aux,char dest){
+        if(L.isEmpty()||M.isEmpty()||R.isEmpty()) return ;
+        int size=L.size();
+        if(size%2==0){
+            char temp=dest;
+            dest=aux;
+            aux=temp;
+        }
+        int totalTimes=(int)(Math.pow(2,size)-1);
+            for(int i=1;i<=totalTimes;i++) {
+                if (i % 3 == 0) {//mr
+                    int value;
+                    if (size%2==0){
+                        value=M.peek();
+                    R.push(M.pop());
+                    }
+                    else{
+                        value=R.peek();
+                        M.push(R.pop());
+                    }
+                    System.out.println("Move " +value +" from " +aux+" to "+ dest);
+                }
+                if (i % 3 == 1) {//lr
+                    int value;
+                    if(size%2==0){
+                        value=M.peek();
+                        L.push(M.pop());
+                        System.out.println("Move " +value +" from " +src+" to "+ dest);
+                    }
+                    else{
+                        value=R.peek();
+                        L.push(R.pop());
+                        System.out.println("Move " +value +" from "+ src+" to "+ dest);
+                    }
+
+                }
+                if (i % 3 == 2) {
+                    //ml
+                    int value;
+                    if(size%2==0){
+                        value=L.peek();
+                        R.push(L.pop());
+                        System.out.println("Move " +value +" from "+ src+" to "+ aux);
+                    }else{
+                        value=L.peek();
+                        M.push(L.pop());
+                        System.out.println("Move " +value +" from "+ src+" to "+ aux);
+                    }
+
+                }
+            }
+
+    }
+
+
     public static void main(String[] args) {
         System.out.println("Hello world");
         stack_queue sq = new stack_queue();
@@ -224,6 +292,6 @@ public class stack_queue {
         for(int i=3;i>=1;i--){
             src.push(i);
         }
-        HanoiWithoutRecursion(src);
+        HanoiWithoutRecursion2(src);
     }
 }
