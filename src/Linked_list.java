@@ -289,7 +289,6 @@ public class Linked_list {
 
         return head;
     }
-
     public static void main(String[] args) {
         Linked_list llist = new Linked_list();
       /*  Linked_list l1 = new Linked_list();

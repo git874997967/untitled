@@ -127,18 +127,18 @@ public class stack_queue {
         R.push(100);
         char src='L',aux='M',dest='R';
      //    even number  switch the r and m
-        if(L.size()%2==0){
-            char tem=aux;
-            aux=dest;
-            dest=tem;
-        }
-        int totalTime=(int)Math.pow(2,L.size())-1;
+        int size=L.size();
+        int totalTime=(int)Math.pow(2,size)-1;
       for(int i=1;i<=totalTime;i++){
           if(i%3==0){
-            moveMR(M,R);
+              if(size%2==0){
+            moveMR(R,M);
+              }else{
+                  moveMR(M,R);
+              }
           }
           if(i%3==1){
-              if(L.size()%2==0){
+              if(size%2==0){
                   moveLR(L,R);
               }
               else{
@@ -146,7 +146,7 @@ public class stack_queue {
               }
           }
           if(i%3==2){
-              if(L.size()%2==0){
+              if(size%2==0){
                   moveLM(L,M);
               }
               else{
